@@ -5,15 +5,18 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6257C9F8-4B4B-460C-AF44-CBB2A0F577C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAggregator", "src\OrderAggregator\OrderAggregator.csproj", "{2D74A117-F875-4D29-9F6D-04AD09D03CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderAggregator", "src\OrderAggregator\OrderAggregator.csproj", "{2D74A117-F875-4D29-9F6D-04AD09D03CF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB15ECFD-5712-48AD-B0F9-FC698A0E77CE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		task.md = task.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2D74A117-F875-4D29-9F6D-04AD09D03CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -21,7 +24,13 @@ Global
 		{2D74A117-F875-4D29-9F6D-04AD09D03CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D74A117-F875-4D29-9F6D-04AD09D03CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D74A117-F875-4D29-9F6D-04AD09D03CF7} = {6257C9F8-4B4B-460C-AF44-CBB2A0F577C9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39BA2054-4190-45E3-BECC-24E991FCE43D}
 	EndGlobalSection
 EndGlobal
