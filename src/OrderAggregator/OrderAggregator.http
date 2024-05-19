@@ -1,6 +1,22 @@
-@OrderAggregator_HostAddress = http://localhost:5261
+@OrderAggregator_HostAddress = https://localhost:7251
 
-GET {{OrderAggregator_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{OrderAggregator_HostAddress}}/api/order
+Content-Type: application/json
+
+[
+  {
+    "productId": 0,
+    "quantity": 0
+  },
+  {
+    "productId": 1,
+    "quantity": 2
+  }
+
+]
+
+###
+
+GET {{OrderAggregator_HostAddress}}/api/order
 
 ###
