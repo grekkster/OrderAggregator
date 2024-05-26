@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OrderAggregator.Models;
 using OrderAggregator.Services;
 
@@ -14,20 +13,26 @@ public class OrderController(IOrderService orderService) : ControllerBase
 {
     private readonly IOrderService _orderService = orderService;
 
+    // TODO jen pro test, asi pak pryč
     [HttpGet]
-    public ActionResult<Order[]> GetOrders() =>
-        //Ok(Orders.Select(item => new Order { ProductId = item.Key, Quantity = item.Value }));
-        Ok(_orderService.GetAllOrders());
+    public ActionResult<Order[]> GetOrders() => Ok(_orderService.GetAllOrders());
 
     [HttpPost]
-    public async Task<ActionResult> PostOrders(Order[] orders)
+    //public async Task<ActionResult> PostOrders(Order[] orders)
+    public async Task<ActionResult> PostOrders([FromBody] Order[] orders)
     {
-        //foreach (var order in orders)
-        //{
-        //    Orders.AddOrUpdate(order.ProductId, order.Quantity, (key, oldValue) => oldValue + order.Quantity);
-        //}
+        if (orders is null)
+        {
+            return BadRequest("No orders received."); // TODO konstanty
+        }
+
+        if (orders.Any(o => o.Quantity <= 0))
+        {
+            return BadRequest("Quantity must be higher than 0.");
+        }
+
         _orderService.AddOrUpdateOrder(orders);
 
-        return Created();
+        return NoContent();
     }
 }
