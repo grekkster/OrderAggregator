@@ -1,26 +1,19 @@
-﻿using System.Collections.Concurrent;
-
-using OrderAggregator.Models;
+﻿using OrderAggregator.Models;
 
 namespace OrderAggregator.Services;
 
-public class OrderService : IOrderService
+public class OrderService(IProductStore productStore) : IOrderService
 {
+    private readonly IProductStore _productStore = productStore;
     // TODO IRepository
-    // TODO OrdersService + nějaká abstrakce, prozatím uložit do paměti
-    private static readonly ConcurrentDictionary<int, ulong> Orders = new();
 
     public void AddOrUpdateOrder(IEnumerable<Order> orders)
     {
         foreach (var order in orders)
         {
-            Orders.AddOrUpdate(order.ProductId, order.Quantity, (key, oldValue) => oldValue + order.Quantity);
+            _productStore.AddOrUpdateProduct(order);
         }
     }
 
-    public Dictionary<int, ulong> GetAllOrders()
-    {
-        return Orders.ToDictionary();
-        //return Orders.Select(item => new Order { ProductId = item.Key, Quantity = item.Value });
-    }
+    public Dictionary<int, ulong> GetAllOrders() => _productStore.GetAllOrders();
 }
