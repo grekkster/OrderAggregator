@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.Extensions.Options;
+using OrderAggregator.Configuration;
+
 namespace OrderAggregator.Services;
 
 public class OrderDispatcherService(IServiceProvider services) : BackgroundService
@@ -9,18 +12,25 @@ public class OrderDispatcherService(IServiceProvider services) : BackgroundServi
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            // TODO zastavit? stoppingToken
+            // TODO zastavit? stoppingToken, možná alespoň logging - zastaveno, dokončeno atp..
+            // https://github.com/TechMinder/DynamicConfigurationChanges/blob/master/BackgroundService/ConfiugrationHostedService.cs
             using var scope = _service.CreateScope();
             var scopedOrderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
-            //var orderService = scope.ServiceProvider.GetService<IOrderService>();
+            
+            var optionsDelegate = scope.ServiceProvider.GetRequiredService<IOptionsMonitor<OrderDispatcherOptions>>();
 
-            // TODO timer z konfigurace
-            using PeriodicTimer timer = new(TimeSpan.FromSeconds(3));
+            using PeriodicTimer timer = new(TimeSpan.FromSeconds(optionsDelegate.CurrentValue.DispatcherTimerSeconds));
+
+            using var optionsChangeListener = optionsDelegate.OnChange((options) =>
+            {
+                timer.Period = TimeSpan.FromSeconds(options.DispatcherTimerSeconds);
+                Console.WriteLine("Dispatch timer changed: " + options.DispatcherTimerSeconds);
+            });
 
             while (await timer.WaitForNextTickAsync(stoppingToken))
             {
+                Console.WriteLine($"Now: {DateTime.Now}, Reload time: {timer.Period.Seconds}, Orders:");
                 foreach (var order in scopedOrderService.GetAllOrders())
-                //foreach (var order in orderService.GetAllOrders())
                 {
                     Console.WriteLine(order);
                 }
