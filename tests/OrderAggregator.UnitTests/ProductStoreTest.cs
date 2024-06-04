@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using OrderAggregator.Models;
+﻿using OrderAggregator.Models;
 using OrderAggregator.Services;
 
 namespace OrderAggregator.UnitTests;
 
 public class ProductStoreTest
 {
-    private readonly ProductStore _sut = new ProductStore();
+    private readonly ProductStore _sut = new();
 
     [Fact]
     public void AddOrUpdateProduct_NonExisting_ShouldAddNew()

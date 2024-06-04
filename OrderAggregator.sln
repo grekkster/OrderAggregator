@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		task.md = task.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAggregator.UnitTests", "tests\OrderAggregator.UnitTests\OrderAggregator.UnitTests.csproj", "{769A81DB-63E2-4EBB-A860-E72775A3E13C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderAggregator.UnitTests", "tests\OrderAggregator.UnitTests\OrderAggregator.UnitTests.csproj", "{769A81DB-63E2-4EBB-A860-E72775A3E13C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{17A186CA-91E8-4D9D-A49A-4BCD4E8D277D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D74A117-F875-4D29-9F6D-04AD09D03CF7} = {6257C9F8-4B4B-460C-AF44-CBB2A0F577C9}
+		{769A81DB-63E2-4EBB-A860-E72775A3E13C} = {17A186CA-91E8-4D9D-A49A-4BCD4E8D277D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39BA2054-4190-45E3-BECC-24E991FCE43D}

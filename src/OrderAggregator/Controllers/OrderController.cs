@@ -20,6 +20,7 @@ public class OrderController(IOrderService orderService) : ControllerBase
     [HttpPost]
     //public async Task<ActionResult> PostOrders(Order[] orders)
     public async Task<ActionResult> PostOrders([FromBody] Order[] orders)
+    //public ActionResult PostOrders([FromBody] Order[] orders)
     {
         if (orders is null)
         {
