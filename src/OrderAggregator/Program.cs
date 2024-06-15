@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IProductStore, ProductStore>();
+builder.Services.AddSingleton<IOrdersProcessor, ConsoleOrdersProcessor>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddHostedService<OrderDispatcherService>();
 builder.Services.AddOptions<OrderDispatcherOptions>()
@@ -27,3 +28,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

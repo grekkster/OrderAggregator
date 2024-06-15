@@ -4,9 +4,10 @@ using OrderAggregator.Configuration;
 
 namespace OrderAggregator.Services;
 
-public class OrderDispatcherService(IServiceProvider services) : BackgroundService
+public class OrderDispatcherService(IServiceProvider services, IOrdersProcessor ordersProcessor) : BackgroundService
 {
-    private readonly IServiceProvider _service = services;
+    private readonly IServiceProvider _services = services;
+    private readonly IOrdersProcessor _ordersProcessor = ordersProcessor;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -14,7 +15,7 @@ public class OrderDispatcherService(IServiceProvider services) : BackgroundServi
         {
             // TODO zastavit? stoppingToken, možná alespoň logging - zastaveno, dokončeno atp..
             // https://github.com/TechMinder/DynamicConfigurationChanges/blob/master/BackgroundService/ConfiugrationHostedService.cs
-            using var scope = _service.CreateScope();
+            using var scope = _services.CreateScope();
             var scopedOrderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
             
             var optionsDelegate = scope.ServiceProvider.GetRequiredService<IOptionsMonitor<OrderDispatcherOptions>>();
@@ -29,11 +30,13 @@ public class OrderDispatcherService(IServiceProvider services) : BackgroundServi
 
             while (await timer.WaitForNextTickAsync(stoppingToken))
             {
+                // TODO nahradit rozhraním
                 Console.WriteLine($"Now: {DateTime.Now}, Reload time: {timer.Period.Seconds}, Orders:");
-                foreach (var order in scopedOrderService.GetAllOrders())
-                {
-                    Console.WriteLine(order);
-                }
+                //foreach (var order in scopedOrderService.GetAllOrders())
+                //{
+                //    Console.WriteLine(order);
+                //}
+                _ordersProcessor.ProcessOrders(scopedOrderService.GetAllOrders());
             }
         }
     }
