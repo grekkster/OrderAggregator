@@ -17,10 +17,10 @@ public class OrderControllerTest
     }
 
     [Fact]
-    public async Task PostOrders_NoOrder_ShouldReturnBadRequest()
+    public void PostOrders_NoOrder_ShouldReturnBadRequest()
     {
         // Act
-        var result = await _sut.PostOrders(null!);
+        var result = _sut.PostOrders(null!);
 
         // Assert
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -29,13 +29,13 @@ public class OrderControllerTest
     }
 
     [Fact]
-    public async Task PostOrders_QuantityZero_ShouldReturnBadRequest()
+    public void PostOrders_QuantityZero_ShouldReturnBadRequest()
     {
         // Ararnge
         var orders = new Order[] { new() { ProductId = 0, Quantity = 0 } };
 
         // Act
-        var result = await _sut.PostOrders(orders);
+        var result = _sut.PostOrders(orders);
 
         // Assert
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -44,13 +44,13 @@ public class OrderControllerTest
     }
 
     [Fact]
-    public async Task PostOrders_ShouldCallAddOrUpdateOrder()
+    public void PostOrders_ShouldCallAddOrUpdateOrder()
     {
         // Ararnge
         var orders = new Order[] { new() { ProductId = 0, Quantity = 1 } };
 
         // Act
-        var result = await _sut.PostOrders(orders);
+        var result = _sut.PostOrders(orders);
 
         // Assert
         var noContentResult = Assert.IsType<NoContentResult>(result);
