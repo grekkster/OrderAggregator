@@ -5,7 +5,6 @@ namespace OrderAggregator.Services;
 public class OrderService(IProductStore productStore) : IOrderService
 {
     private readonly IProductStore _productStore = productStore;
-    // TODO IRepository
 
     public void AddOrUpdateOrder(IEnumerable<Order> orders)
     {

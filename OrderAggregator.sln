@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB15ECFD-5712-48AD-B0F9-FC698A0E77CE}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		README.md = README.md
 		task.md = task.md
 	EndProjectSection
 EndProject
@@ -17,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderAggregator.UnitTests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{17A186CA-91E8-4D9D-A49A-4BCD4E8D277D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAggregator.IntegrationTests", "tests\OrderAggregator.IntegrationTests\OrderAggregator.IntegrationTests.csproj", "{240BB355-0916-44A0-8722-268EDC320432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderAggregator.IntegrationTests", "tests\OrderAggregator.IntegrationTests\OrderAggregator.IntegrationTests.csproj", "{240BB355-0916-44A0-8722-268EDC320432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

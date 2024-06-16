@@ -13,23 +13,20 @@ public class OrderController(IOrderService orderService) : ControllerBase
 {
     private readonly IOrderService _orderService = orderService;
 
-    // TODO jen pro test, asi pak pryč
-    [HttpGet]
-    public ActionResult<Order[]> GetOrders() => Ok(_orderService.GetAllOrders());
-
     [HttpPost]
     //public async Task<ActionResult> PostOrders(Order[] orders)
+    //public async Task<ActionResult> PostOrdersAsync([FromBody] Order[] orders)
     public async Task<ActionResult> PostOrders([FromBody] Order[] orders)
     //public ActionResult PostOrders([FromBody] Order[] orders)
     {
         if (orders is null)
         {
-            return BadRequest("No orders received."); // TODO konstanty
+            return BadRequest(Constants.BadRequestNoOrdersReceived);
         }
 
         if (orders.Any(o => o.Quantity <= 0))
         {
-            return BadRequest("Quantity must be higher than 0.");
+            return BadRequest(Constants.BadRequestQuantity);
         }
 
         _orderService.AddOrUpdateOrder(orders);

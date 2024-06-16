@@ -6,7 +6,7 @@ namespace OrderAggregator.UnitTests;
 
 public class OrderServiceTest
 {
-    private readonly Mock<IProductStore> _productStoreMock = new Mock<IProductStore>();
+    private readonly Mock<IProductStore> _productStoreMock = new();
     private readonly OrderService _sut;
 
     public OrderServiceTest()
@@ -32,7 +32,7 @@ public class OrderServiceTest
     public void AddOrUpdateOrder_EmptyOrders_ShouldNotCallAddOrUpdateProduct()
     {
         // Act
-        _sut.AddOrUpdateOrder(Array.Empty<Order>());
+        _sut.AddOrUpdateOrder([]);
         
         // Assert
         _productStoreMock.VerifyNoOtherCalls();
