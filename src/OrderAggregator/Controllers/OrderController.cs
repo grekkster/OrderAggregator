@@ -27,6 +27,10 @@ public class OrderController(IOrderService orderService) : ControllerBase
             return BadRequest(Constants.BadRequestQuantity);
         }
 
+        // Upgrade - instead of directly updating orders for every request, collect them until treshold count is reached, then update multiple oders in one update call.
+        // - instead of using _orderService directly, use:
+        //_orderService.AddToUpdateBatch(orders);
+
         _orderService.AddOrUpdateOrder(orders);
 
         return NoContent();

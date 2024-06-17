@@ -17,7 +17,7 @@ public class OrderDispatcherServiceTest
     public async Task OrderDispatcherService_ExecuteAsync()
     {
         // Arrange
-        var cts = new CancellationTokenSource();
+        using var cts = new CancellationTokenSource();
         _optionsMonitorMock.Setup(o => o.CurrentValue).Returns(_orderDispatcherOptions);
         _orderServiceMock.Setup(o => o.GetAllOrders()).Returns([]);
 
@@ -29,7 +29,7 @@ public class OrderDispatcherServiceTest
 
         // Act
         await sut.StartAsync(CancellationToken.None);
-        await Task.Delay(1500); // Nutný !!!
+        await Task.Delay(1500);
         await sut.StopAsync(CancellationToken.None);
 
         // Assert

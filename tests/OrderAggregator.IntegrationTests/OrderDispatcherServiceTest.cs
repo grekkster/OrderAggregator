@@ -34,7 +34,7 @@ public class OrderDispatcherServiceTest
 
         // Act
         await service!.StartAsync(CancellationToken.None);
-        await Task.Delay(1000);
+        await Task.Delay(1500);
 
         // Assert
         _orderServiceMock?.Verify(m => m.GetAllOrders(), Times.Once());

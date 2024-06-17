@@ -6,12 +6,13 @@ namespace OrderAggregator.UnitTests;
 
 public class OrderServiceTest
 {
+    private readonly Mock<IBatchStorage> _batchStorageMock = new();
     private readonly Mock<IProductStore> _productStoreMock = new();
     private readonly OrderService _sut;
 
     public OrderServiceTest()
     {
-        _sut = new OrderService(_productStoreMock.Object);
+        _sut = new OrderService(_productStoreMock.Object, _batchStorageMock.Object);
     }
 
     [Theory]

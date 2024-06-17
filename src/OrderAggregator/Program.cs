@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IProductStore, ProductStore>();
 builder.Services.AddSingleton<IOrdersProcessor, ConsoleOrdersProcessor>();
+builder.Services.AddSingleton<IBatchStorage, BatchStorage>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddHostedService<OrderDispatcherService>();
 builder.Services.AddOptions<OrderDispatcherOptions>()
